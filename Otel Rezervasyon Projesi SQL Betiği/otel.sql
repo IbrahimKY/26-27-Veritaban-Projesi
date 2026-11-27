@@ -74,13 +74,16 @@ CREATE TABLE rezervasyon (
     durum BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (oda_tipi) REFERENCES oda_tipi(tip_adi)
 );
-
+--27.11.26 kaan yıldırım: primary key artık rezervasyon_id ile aynı bu sayede fazladan id oluşturma ihtiyacı ortadan kalktı 
 CREATE TABLE konaklama (
-    konaklama_id INT PRIMARY KEY AUTO_INCREMENT,
+    rezervasyon_id INT PRIMARY KEY,
     personel_id INT,
+    oda_no INT NOT NULL,
     gercek_giris DATE,
     gercek_cikis DATE,
-    FOREIGN KEY (personel_id) REFERENCES personel(personel_id)
+    FOREIGN KEY (rezervasyon_id) REFERENCES rezervasyon(rezervasyon_id),
+    FOREIGN KEY (personel_id) REFERENCES personel(personel_id),
+    FOREIGN KEY (oda_no) REFERENCES oda(oda_no)
 );
 
 CREATE TABLE temizlik_kaydi (
