@@ -62,16 +62,16 @@ CREATE TABLE oda (
     kat INT,
     FOREIGN KEY (tip_adi) REFERENCES oda_tipi(tip_adi)
 );
---27.11.26 kaan yıldırım: oda tipi artık oda tablosundan fk olarak alınıyor
+--27.11.26 kaan yıldırım: oda tipi artık oda tablosundan fk olarak alınıyor, durum boolean rezervasyon aktifse true iptalse false
 CREATE TABLE rezervasyon (
     rezervasyon_id INT PRIMARY KEY AUTO_INCREMENT,
     kisi_sayisi INT,
     misafir_adisoyadi VARCHAR(50),
     oda_tipi VARCHAR(50),
     olusturma_tarihi DATE,
-    giris_tarihi DATE,
-    cikis_tarihi DATE,
-    durum CHAR,
+    giris_tarihi DATE NOT NULL,
+    cikis_tarihi DATE NOT NULL,
+    durum BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (oda_tipi) REFERENCES oda_tipi(tip_adi)
 );
 
